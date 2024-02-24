@@ -14,7 +14,8 @@ def main():
     dt = 0
     running = True
     scenes:dict[int, Scene] = {
-        0:TitleScreen(game)
+        0:TitleScreen(game),
+        1:MenuScreen(game)
     }
     screen = pygame.display.set_mode(SCREEN_SIZE)
     
