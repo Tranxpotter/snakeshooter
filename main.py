@@ -13,7 +13,9 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     running = True
-    scenes:dict[int, Scene] = {}
+    scenes:dict[int, Scene] = {
+        0:TitleScreen(game)
+    }
     screen = pygame.display.set_mode(SCREEN_SIZE)
     
     while running:
@@ -33,7 +35,8 @@ def main():
         
         screen.fill((0,0,0))
         curr_scene.draw(screen)
-            
+        
+        pygame.display.update()
         
         
         

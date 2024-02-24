@@ -12,7 +12,7 @@
     "@title_label":{
         "font":{
             "name":"Helvetica",
-            "size":"30"
+            "size":"50"
         },
         "colours":{
             "normal_text":"white",
@@ -22,7 +22,7 @@
     "@friendly_btn":{
         "font":{
             "name":"Helvetica",
-            "size":"20"
+            "size":"30"
         },
         "colours":{
             "normal_text":"white",
