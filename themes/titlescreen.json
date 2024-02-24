@@ -1,0 +1,34 @@
+{
+    "label":{
+        "font":{
+            "name":"Helvetica",
+            "size":"30",
+            "regular_path":"fonts/Helvetica-Font/Helvetica.ttf",
+            "bold_path":"fonts/Helvetica-Font/Helvetica-Bold.ttf",
+            "italic_path":"fonts/Helvetica-Font/Helvetica-Oblique.ttf",
+            "bold_italic_path":"fonts/Helvetica-Font/Helvetica-BoldOblique.ttf"
+        }
+    },
+    "@title_label":{
+        "font":{
+            "name":"Helvetica",
+            "size":"30"
+        },
+        "colours":{
+            "normal_text":"white",
+            "text_shadow":"black"
+        }
+    },
+    "@friendly_btn":{
+        "font":{
+            "name":"Helvetica",
+            "size":"20"
+        },
+        "colours":{
+            "normal_text":"white",
+            "normal_bg":"green",
+            "hovered_bg":"darkgreen",
+            "normal_border":"darkgreen"
+        }
+    }
+}
