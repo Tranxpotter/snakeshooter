@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 from scenes import *
-from game import Game
+from game_info import GameInfo
 
 
 SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = (1280, 720)
@@ -9,7 +9,7 @@ SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = (1280, 720)
 
 
 def main():
-    game = Game(SCREEN_SIZE)
+    game = GameInfo(SCREEN_SIZE)
     clock = pygame.time.Clock()
     dt = 0
     running = True

@@ -3,7 +3,9 @@ import pygame
 import pygame_gui
 import fonts
 from utils import *
-from game import Game
+from game_info import GameInfo
+
+
 class Scene:
     @abstractmethod
     def __init__(self, *args, **kwargs) -> None:...
@@ -18,7 +20,7 @@ class Scene:
     def draw(self, screen:pygame.Surface) -> None:...
 
 class TitleScreen(Scene):
-    def __init__(self, game:Game) -> None:
+    def __init__(self, game:GameInfo) -> None:
         self.game = game
         screen_size = game.screen_size
         self.screen_size = self.screen_width, self.screen_height = screen_size
@@ -73,13 +75,9 @@ class TitleScreen(Scene):
     def draw(self, screen: pygame.Surface) -> None:
         screen.blit(self.bg_img, (0, 0))
         self.ui_manager.draw_ui(screen)
-        
-        
-        
-
 
 class MenuScreen(Scene):
-    def __init__(self, game:Game) -> None:
+    def __init__(self, game:GameInfo) -> None:
         self.game = game
         screen_size = game.screen_size
         
@@ -109,7 +107,11 @@ class MenuScreen(Scene):
         self.ui_manager.draw_ui(screen)
 
 
-
+class PlayingScreen(Scene):
+    def __init__(self, game:GameInfo) -> None:
+        self.game = game
+    
+    
 
 
 
