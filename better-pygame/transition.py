@@ -1,3 +1,5 @@
+from typing import Literal
+
 import pygame
 
 from ._constants import ON_TRANSITION_END
@@ -57,13 +59,39 @@ class Transition:
         self.object_id = object_id
 
 
-    def start(self, scene, screen_size:tuple[int, int]):
-        '''Start the transition for a specific scene'''
+    def start(self, scene, scene_size:tuple[int, int]):
+        '''Start the transition for a specific scene
+        
+        Parameters
+        ------------
+        scene: `Scene`
+            The scene to be transitioned
+        scene_size: `tuple`[`int`, `int`]
+            The intended screen size for the scene'''
         self.scene = scene
-        self.screen_size = screen_size
-        self._curr_size = screen_size
+        self.scene_size = scene_size
+        self._curr_size = scene_size
         self.timer:int|float = self.sections[self.curr_section_index]["duration"]
         self._running = True
+    
+    def terminate(self):
+        '''Terminate the running transition and reset all attributes. Triggers ON_TRANSITION_END event'''
+        if not self._running:
+            return
+        self.curr_section_index = 0
+        self.scene = None
+        self.timer = 0
+        self._running = False
+        
+        self._curr_position = (0, 0)
+        self._curr_position_shift_rate = None
+        self._curr_size_change_rate = None
+        self._curr_angle = 0
+        self._curr_angle_change_rate = None
+        self._curr_transparency = 255
+        self._curr_transparency_change_rate = None
+        event = pygame.Event(ON_TRANSITION_END, {"element":self, "object_id":self.object_id})
+        pygame.event.post(event)
     
     @staticmethod
     def get_change_rate_vec(start_vec:tuple[int|float, int|float], end_vec:tuple[int|float, int|float], duration:int|float):
@@ -168,7 +196,7 @@ class Transition:
     def draw(self, screen:pygame.Surface):
         if not self.scene:
             return
-        surf = transparent_surface(self.screen_size)
+        surf = transparent_surface(self.scene_size)
         self.scene.draw(surf)
         surf = pygame.transform.scale(surf, self._curr_size)
         surf = pygame.transform.rotate(surf, self._curr_angle % 360)
@@ -177,7 +205,38 @@ class Transition:
 
 
 
+# def fast_build(screen_size:tuple[int, int], 
+#                type:Literal["enter", "exit"], 
+#                move_direction:Literal["up", "down", "left", "right", "left-up", "left-down", "right-up", "right-down"]|None,
+#                transition_speed:Literal["linear", ""]
+#             ):
+#     ...
 
+
+
+
+class LinearSlideDownExit(Transition):
+    def __init__(self, screen_size:tuple[int, int], duration:float, object_id: str | None = None) -> None:
+        sections = [
+            {
+                "start_position":(0, 0),
+                "end_position":(0, screen_size[1]),
+                "duration":duration
+            }
+        ]
+        super().__init__(sections, object_id)
+
+
+class LinearSlideDownEnter(Transition):
+    def __init__(self, screen_size:tuple[int, int], duration:float, object_id: str | None = None) -> None:
+        sections = [
+            {
+                "start_position":(0, -screen_size[1]),
+                "end_position":(0, 0),
+                "duration":duration
+            }
+        ]
+        super().__init__(sections, object_id)
 
 
 

@@ -127,7 +127,7 @@ class MultiAnimation:
             Get the Surface of the current animation frame
     '''
 
-    def __init__(self, animations:dict[str, Animation], start:str = None) -> None:
+    def __init__(self, animations:dict[str, Animation], start:str|None = None) -> None:
         self.animations = animations
         if start and start not in animations.keys():
             raise ValueError(f"Start key {start} not in animations")
@@ -144,7 +144,7 @@ class MultiAnimation:
     
     def switch_animation(self, key:str):
         if key in self.animations.keys():
-            self.curr_animation = self.animations[key]
+            self.curr_animation_key = key
         else:
             raise ValueError(f"Key [{key}] not in animations")
     
