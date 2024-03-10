@@ -76,6 +76,8 @@ class TitleScreen(Scene):
         screen.blit(self.bg_img, (0, 0))
         self.ui_manager.draw_ui(screen)
 
+
+
 class MenuScreen(Scene):
     def __init__(self, game:GameInfo) -> None:
         self.game = game
